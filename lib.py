@@ -24,13 +24,13 @@
 AST manipulation
 '''
 
+import functools
 import ast
 import sys
 import tokenize
 
 if sys.version_info >= (3, 2):
     python_open = tokenize.open
-    del tokenize
 elif sys.version_info >= (3,):
     import py_compile
     def python_open(path, read_encoding=py_compile.read_encoding):
@@ -62,6 +62,11 @@ def extract_strings(path):
     tree = ast.parse(source, filename=path)
     for s in _extract_strings(tree):
         yield s
+    source_iter = iter(source.splitlines(True))
+    readline = functools.partial(next, source_iter)
+    for tp, token, srow_scol, erow_ecol, line in tokenize.generate_tokens(readline):
+        if tp == tokenize.COMMENT:
+            yield token
 
 __all__ = [
     'extract_strings',
