@@ -41,8 +41,11 @@ else:
     def python_open(path):
         return open(path, 'rU')
 
+if str != bytes:
+    unicode = str
+
 def _extract_strings(obj):
-    if isinstance(obj, (str, bytes)):
+    if isinstance(obj, (str, bytes, unicode)):
         yield obj
         return
     if isinstance(obj, list):
