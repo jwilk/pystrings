@@ -22,13 +22,14 @@
 # SOFTWARE.
 
 import argparse
+import locale
 import sys
 
 import lib
 
 def main():
     ap = argparse.ArgumentParser()
-    default_encoding = sys.stdout.encoding or 'ASCII'
+    default_encoding = sys.stdout.encoding or locale.getpreferredencoding()
     ap.add_argument('-e', '--encoding', default=default_encoding)
     ap.add_argument('paths', metavar='PATH', nargs='+')
     options = ap.parse_args()
