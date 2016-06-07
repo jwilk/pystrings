@@ -45,6 +45,7 @@ def main():
     ap = argparse.ArgumentParser()
     default_encoding = sys.stdout.encoding or locale.getpreferredencoding()
     ap.add_argument('-e', '--encoding', default=default_encoding)
+    ap.add_argument('--traceback', action='store_true', help=argparse.SUPPRESS)
     ap.add_argument('paths', metavar='PATH', nargs='+')
     options = ap.parse_args()
     rc = 0
@@ -52,6 +53,8 @@ def main():
         try:
             process_file(options, path)
         except SyntaxError as exc:
+            if options.traceback:
+                raise
             msg = '{prog}: {path}: {exc}'.format(prog=ap.prog, path=path, exc=exc)
             print(msg, file=sys.stderr)
             rc = 1
