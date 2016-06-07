@@ -62,7 +62,10 @@ def _extract_strings(obj):
 def extract_strings(path):
     with python_open(path) as file:
         source = file.read()
-    tree = ast.parse(source, filename=path)
+    try:
+        tree = ast.parse(source, filename=path)
+    except TypeError as exc:
+        raise SyntaxError(exc)
     for s in _extract_strings(tree):
         yield s
     source_iter = iter(source.splitlines(True))

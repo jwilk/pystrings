@@ -21,6 +21,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+from __future__ import print_function
+
 import argparse
 import locale
 import sys
@@ -45,8 +47,15 @@ def main():
     ap.add_argument('-e', '--encoding', default=default_encoding)
     ap.add_argument('paths', metavar='PATH', nargs='+')
     options = ap.parse_args()
+    rc = 0
     for path in options.paths:
-        process_file(options, path)
+        try:
+            process_file(options, path)
+        except SyntaxError as exc:
+            msg = '{prog}: {path}: {exc}'.format(prog=ap.prog, path=path, exc=exc)
+            print(msg, file=sys.stderr)
+            rc = 1
+    sys.exit(rc)
 
 if __name__ == '__main__':
     main()
