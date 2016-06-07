@@ -27,23 +27,26 @@ import sys
 
 import lib
 
+def process_file(options, path):
+    stdout = sys.stdout
+    if str != bytes:
+        stdout = stdout.buffer
+    for s in lib.extract_strings(path):
+        if isinstance(s, bytes):
+            b = s
+        else:
+            b = s.encode(options.encoding, 'replace')
+        stdout.write(b)
+        stdout.write(b'\n')
+
 def main():
     ap = argparse.ArgumentParser()
     default_encoding = sys.stdout.encoding or locale.getpreferredencoding()
     ap.add_argument('-e', '--encoding', default=default_encoding)
     ap.add_argument('paths', metavar='PATH', nargs='+')
     options = ap.parse_args()
-    stdout = sys.stdout
-    if str != bytes:
-        stdout = stdout.buffer
     for path in options.paths:
-        for s in lib.extract_strings(path):
-            if isinstance(s, bytes):
-                b = s
-            else:
-                b = s.encode(options.encoding, 'replace')
-            stdout.write(b)
-            stdout.write(b'\n')
+        process_file(options, path)
 
 if __name__ == '__main__':
     main()
