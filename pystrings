@@ -31,7 +31,7 @@ import lib
 
 def process_file(options, path):
     stdout = sys.stdout
-    if str != bytes:
+    if str is not bytes:
         stdout = stdout.buffer
     for s in lib.extract_strings(path):
         if isinstance(s, bytes):

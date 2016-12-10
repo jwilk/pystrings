@@ -41,7 +41,7 @@ else:
     def python_open(path):
         return open(path, 'rU')
 
-if str != bytes:
+if str is not bytes:
     unicode = str
 
 def _extract_strings(obj):
