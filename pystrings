@@ -25,6 +25,7 @@ from __future__ import print_function
 
 import argparse
 import locale
+import signal
 import sys
 
 import lib
@@ -48,6 +49,7 @@ def main():
     ap.add_argument('--traceback', action='store_true', help=argparse.SUPPRESS)
     ap.add_argument('paths', metavar='PATH', nargs='+')
     options = ap.parse_args()
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
     rc = 0
     for path in options.paths:
         try:
