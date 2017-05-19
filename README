@@ -1,15 +1,15 @@
 .. code:: console
 
-   $ pystrings $(which pystrings)
+   $ pystrings $(which pystrings) | head
    __future__
    print_function
    argparse
    locale
+   signal
    sys
    lib
    process_file
    options
    path
-   …
 
 .. vim:ft=rst ts=3 sts=3 sw=3 et
