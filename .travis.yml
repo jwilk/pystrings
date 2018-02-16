@@ -10,8 +10,11 @@ python:
 - "3.5"
 - "3.6"
 - "3.7-dev"
-install: []
+install:
+- pip install pydiatra pyflakes
 script:
 - ./pystrings pystrings
+- python -m pydiatra .
+- pyflakes .
 
 # vim:ts=2 sts=2 sw=2 et
