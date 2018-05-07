@@ -10,11 +10,16 @@ python:
 - "3.5"
 - "3.6"
 - "3.7-dev"
+before_install:
+- if [[ $TRAVIS_PYTHON_VERSION = 2.6 ]]; then if_rstlint=:; fi
+- if [[ $TRAVIS_PYTHON_VERSION = 3.2 ]]; then if_rstlint=:; fi
 install:
 - pip install pydiatra pyflakes
+- $if_rstlint pip install restructuredtext-lint pygments
 script:
 - ./pystrings pystrings
 - python -m pydiatra .
 - pyflakes .
+- $if_rstlint restructuredtext-lint --encoding=UTF-8 README
 
 # vim:ts=2 sts=2 sw=2 et
