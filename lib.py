@@ -14,13 +14,7 @@ import tokenize
 
 if sys.version_info >= (3, 2):
     python_open = tokenize.open
-elif sys.version_info >= (3,):
-    import py_compile
-    def python_open(path, read_encoding=py_compile.read_encoding):
-        encoding = read_encoding(path, 'utf-8')
-        return open(path, 'rU', encoding=encoding)
-    del py_compile
-else:
+elif sys.version_info < (3,):
     def python_open(path):
         return open(path, 'rU')
 
