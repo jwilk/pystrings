@@ -24,7 +24,7 @@ install:
 - pip install pydiatra $pyflakes
 - $if_rstlint pip install restructuredtext-lint pygments
 script:
-- ./pystrings pystrings
+- prove -v
 - python -m pydiatra .
 - pyflakes .
 - $if_rstlint restructuredtext-lint --encoding=UTF-8 README
