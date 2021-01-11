@@ -8,8 +8,8 @@
    signal
    sys
    lib
-   process_file
-   options
-   path
+   sys
+   version_info
+   RuntimeError
 
 .. vim:ft=rst ts=3 sts=3 sw=3 et
