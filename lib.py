@@ -23,7 +23,8 @@ if str is not bytes:
 
 def _extract_strings(obj):
     if isinstance(obj, (str, bytes, unicode)):
-        yield obj
+        if obj:
+            yield obj
         return
     if isinstance(obj, list):
         for item in obj:
