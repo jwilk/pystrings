@@ -1,6 +1,6 @@
 .. code:: console
 
-   $ pystrings $(which pystrings) | head
+   $ pystrings $(command -v pystrings) | head
    __future__
    print_function
    argparse
