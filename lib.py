@@ -7,8 +7,8 @@
 AST manipulation
 '''
 
-import functools
 import ast
+import functools
 import sys
 import tokenize
 
