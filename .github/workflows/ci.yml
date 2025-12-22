@@ -52,6 +52,7 @@ jobs:
         python -m pip install pyflakes
         python -m pyflakes .
     - name: check README syntax
+      if: matrix.python != '2.7'
       run: |
         python -m pip install restructuredtext-lint pygments
         rst-lint --level=info README
