@@ -31,6 +31,7 @@ def process_file(options, path):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.color = False
     default_encoding = sys.stdout.encoding or locale.getpreferredencoding()
     ap.add_argument('-e', '--encoding', default=default_encoding)
     ap.add_argument('--traceback', action='store_true', help=argparse.SUPPRESS)
